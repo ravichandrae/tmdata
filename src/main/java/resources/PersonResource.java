@@ -1,6 +1,7 @@
 package resources;
 
 import com.mongodb.WriteResult;
+import config.MongoConfig;
 import entities.Person;
 import service.PersonService;
 
@@ -16,9 +17,9 @@ import java.util.List;
 public class PersonResource extends BaseResource {
     private PersonService personService;
 
-    public PersonResource(String mongoUrl, int mongoPort) {
-        super(mongoUrl, mongoPort);
-        personService = new PersonService(mongoUrl, mongoPort);
+    public PersonResource(MongoConfig mongoConfig) {
+        super(mongoConfig);
+        personService = new PersonService(mongoConfig);
     }
 
     @GET

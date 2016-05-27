@@ -1,6 +1,7 @@
 package service;
 
 import com.mongodb.WriteResult;
+import config.MongoConfig;
 import entities.Song;
 import org.mongodb.morphia.query.Query;
 import utils.CounterType;
@@ -12,8 +13,8 @@ import java.util.List;
  * Created by renaganti on 5/18/16.
  */
 public class SongService extends BaseService {
-    public SongService(String mongoUrl, int port) {
-        super(mongoUrl, port);
+    public SongService(MongoConfig mongoConfig) {
+        super(mongoConfig);
     }
     public Song addNew(Song song) {
         long songId = MongoDBUtils.getNextId(CounterType.SONG_ID, datastore);

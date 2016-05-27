@@ -1,2 +1,6 @@
-mongoUrl: localhost
-mongoPort: 27017
+mongoConfig:
+    mongoUrl: ds011923.mlab.com
+    mongoPort: 11923
+    dbName: tmdb
+    userName: tmdb
+    password: tmdata123

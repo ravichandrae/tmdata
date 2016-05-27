@@ -7,25 +7,13 @@ import com.yammer.dropwizard.config.Configuration;
  * Created by renaganti on 5/18/16.
  */
 public class TMDConfig extends Configuration{
-    @JsonProperty
-    private String mongoUrl;
+    private MongoConfig mongoConfig;
 
-    @JsonProperty
-    private int mongoPort;
-
-    public String getMongoUrl() {
-        return mongoUrl;
+    public MongoConfig getMongoConfig() {
+        return mongoConfig;
     }
 
-    public void setMongoUrl(String mongoUrl) {
-        this.mongoUrl = mongoUrl;
-    }
-
-    public int getMongoPort() {
-        return mongoPort;
-    }
-
-    public void setMongoPort(int mongoPort) {
-        this.mongoPort = mongoPort;
+    public void setMongoConfig(MongoConfig mongoConfig) {
+        this.mongoConfig = mongoConfig;
     }
 }

@@ -1,6 +1,7 @@
 package resources;
 
 import com.mongodb.WriteResult;
+import config.MongoConfig;
 import entities.Song;
 import service.SongService;
 
@@ -15,9 +16,9 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class SongResource extends BaseResource {
     private SongService songService;
-    public SongResource(String mongoUrl, int port) {
-        super(mongoUrl, port);
-        songService = new SongService(mongoUrl, port);
+    public SongResource(MongoConfig mongoConfig) {
+        super(mongoConfig);
+        songService = new SongService(mongoConfig);
     }
 
     @GET

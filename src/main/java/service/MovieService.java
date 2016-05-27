@@ -1,6 +1,7 @@
 package service;
 
 import com.mongodb.WriteResult;
+import config.MongoConfig;
 import entities.Movie;
 import org.mongodb.morphia.query.Query;
 import utils.CounterType;
@@ -14,8 +15,8 @@ import static com.mongodb.client.model.Filters.eq;
  */
 public class MovieService extends BaseService {
 
-    public MovieService(String mongoUrl, int mongoPort) {
-        super(mongoUrl, mongoPort);
+    public MovieService(MongoConfig mongoConfig) {
+        super(mongoConfig);
     }
     public Movie addNew(Movie movie) {
         long movieId = MongoDBUtils.getNextId(CounterType.MOVIE_ID, datastore);

@@ -1,6 +1,7 @@
 package resources;
 
 import com.mongodb.WriteResult;
+import config.MongoConfig;
 import entities.Movie;
 import service.MovieService;
 
@@ -15,9 +16,9 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class MovieResource extends BaseResource{
     private MovieService movieService;
-    public MovieResource(String mongoUrl, int mongoPort) {
-        super(mongoUrl, mongoPort);
-        movieService = new MovieService(mongoUrl, mongoPort);
+    public MovieResource(MongoConfig mongoConfig) {
+        super(mongoConfig);
+        movieService = new MovieService(mongoConfig);
     }
 
     @GET

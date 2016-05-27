@@ -1,6 +1,7 @@
 package service;
 
 import com.mongodb.WriteResult;
+import config.MongoConfig;
 import entities.Person;
 import org.mongodb.morphia.query.Query;
 import utils.CounterType;
@@ -12,8 +13,8 @@ import java.util.List;
  * Created by renaganti on 5/18/16.
  */
 public class PersonService extends BaseService {
-    public PersonService(String mongoUrl, int mongoPort) {
-        super(mongoUrl, mongoPort);
+    public PersonService(MongoConfig mongoConfig) {
+        super(mongoConfig);
     }
     public Person addNew(Person person) {
         long personId = MongoDBUtils.getNextId(CounterType.PERSON_ID, datastore);
