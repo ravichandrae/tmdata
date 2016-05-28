@@ -7,7 +7,10 @@
     <groupId>org.telugumeta.data</groupId>
     <artifactId>telugumetadata</artifactId>
     <version>1.0-SNAPSHOT</version>
-
+    <properties>
+       <maven.compiler.compilerVersion>1.7.0_76</maven.compiler.compilerVersion>
+       <maven.compiler.fork>true</maven.compiler.fork>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>com.yammer.dropwizard</groupId>
@@ -25,5 +28,51 @@
             <version>1.0.1</version>
         </dependency>
     </dependencies>
-
+    <build>
+	<plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.0</version>
+                <configuration>
+                    <source>1.7</source>
+                    <target>1.7</target>
+                </configuration>
+            </plugin>
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-shade-plugin</artifactId>
+    <version>2.3</version>
+    <configuration>
+        <createDependencyReducedPom>true</createDependencyReducedPom>
+        <filters>
+            <filter>
+                <artifact>*:*</artifact>
+                <excludes>
+                    <exclude>META-INF/*.SF</exclude>
+                    <exclude>META-INF/*.DSA</exclude>
+                    <exclude>META-INF/*.RSA</exclude>
+                </excludes>
+            </filter>
+        </filters>
+    </configuration>
+    <executions>
+        <execution>
+            <phase>package</phase>
+            <goals>
+                <goal>shade</goal>
+            </goals>
+            <configuration>
+                <transformers>
+                    <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                    <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                        <mainClass>service.TMDService</mainClass>
+                    </transformer>
+                </transformers>
+            </configuration>
+        </execution>
+    </executions>
+</plugin>
+        </plugins>
+    </build>
 </project>
