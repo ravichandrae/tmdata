@@ -8,7 +8,7 @@ import org.mongodb.morphia.annotations.Property;
  * Created by renaganti on 5/18/16.
  */
 @Entity("movie")
-public class Movie {
+public class Movie extends BaseEntity {
 
     @Id
     @Property("_id")

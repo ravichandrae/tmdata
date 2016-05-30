@@ -10,7 +10,7 @@ import java.util.List;
  * Created by renaganti on 5/18/16.
  */
 @Entity("song")
-public class Song {
+public class Song extends BaseEntity {
     @Id
     @Property("_id")
     private long id;

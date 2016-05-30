@@ -12,7 +12,7 @@ import java.util.Map;
  * Created by renaganti on 5/18/16.
  */
 @Entity("person")
-public class Person {
+public class Person extends BaseEntity {
 
     @Id
     @Property("_id")
@@ -41,6 +41,9 @@ public class Person {
 
     @Embedded("occupations")
     private List<Attribute> occupations;
+
+    @Property("imageUrl")
+    private String imageUrl;
 
     public long getId() {
         return id;
@@ -112,5 +115,13 @@ public class Person {
 
     public void setDeathPlace(String deathPlace) {
         this.deathPlace = deathPlace;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

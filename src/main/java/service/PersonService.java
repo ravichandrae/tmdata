@@ -7,6 +7,8 @@ import org.mongodb.morphia.query.Query;
 import utils.CounterType;
 import utils.MongoDBUtils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -16,9 +18,13 @@ public class PersonService extends BaseService {
     public PersonService(MongoConfig mongoConfig) {
         super(mongoConfig);
     }
+
     public Person addNew(Person person) {
         long personId = MongoDBUtils.getNextId(CounterType.PERSON_ID, datastore);
         person.setId(personId);
+        Date updatedDate = new Date();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        person.setLastUpdated(simpleDateFormat.format(updatedDate));
         datastore.save(person);
         return person;
     }
