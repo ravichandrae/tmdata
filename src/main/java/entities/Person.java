@@ -39,7 +39,7 @@ public class Person {
     @Property("alternateNames")
     private List<String> alternateNames;
 
-    @Embedded("occupation")
+    @Embedded("occupations")
     private List<Attribute> occupations;
 
     public long getId() {

@@ -4,6 +4,7 @@ import com.yammer.dropwizard.Service;
 import com.yammer.dropwizard.config.Bootstrap;
 import com.yammer.dropwizard.config.Environment;
 import config.TMDConfig;
+import org.eclipse.jetty.servlets.CrossOriginFilter;
 import resources.AttributeResource;
 import resources.MovieResource;
 import resources.PersonResource;
@@ -28,5 +29,10 @@ public class TMDService extends Service<TMDConfig> {
         environment.addResource(new PersonResource(config.getMongoConfig()));
         environment.addResource(new SongResource(config.getMongoConfig()));
         environment.addResource(new AttributeResource(config.getMongoConfig()));
+
+        environment.addFilter(CrossOriginFilter.class, "/*")
+                .setInitParam("allowedOrigins", "*")
+                .setInitParam("allowedHeaders", "X-Requested-With,Content-Type,Accept,Origin")
+                .setInitParam("allowedMethods", "OPTIONS,GET,PUT,POST,DELETE,HEAD");
     }
 }
