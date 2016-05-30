@@ -30,7 +30,7 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-servlets</artifactId>
-            <version>9.3.9.v20160517</version>
+            <version>8.1.10.v20130312</version>
         </dependency>
     </dependencies>
     <build>
