@@ -6,6 +6,7 @@ import entities.Person;
 import org.mongodb.morphia.query.Query;
 import utils.CounterType;
 import utils.MongoDBUtils;
+import utils.TMDUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,9 +23,7 @@ public class PersonService extends BaseService {
     public Person addNew(Person person) {
         long personId = MongoDBUtils.getNextId(CounterType.PERSON_ID, datastore);
         person.setId(personId);
-        Date updatedDate = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        person.setLastUpdated(simpleDateFormat.format(updatedDate));
+        person.setLastUpdated(TMDUtils.getCurrentDate());
         datastore.save(person);
         return person;
     }
@@ -40,6 +39,7 @@ public class PersonService extends BaseService {
     }
 
     public Person update(Person person) {
+        person.setLastUpdated(TMDUtils.getCurrentDate());
         datastore.save(person);
         return person;
     }
@@ -54,7 +54,10 @@ public class PersonService extends BaseService {
     public List<Person> searchPerson(String name, String profession) {
         Query<Person> personQuery = datastore.createQuery(Person.class);
         if( name != null && !name.isEmpty() ) {
-            personQuery = personQuery.field("name").contains(name);
+            personQuery.or(
+                    personQuery.criteria("name").contains(name),
+                    personQuery.criteria("alternateNames").hasThisOne(name)
+                    );
         }
         if( profession != null && !profession.isEmpty() ) {
             personQuery = personQuery.field("occupations").contains(profession);
